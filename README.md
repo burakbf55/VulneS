@@ -1,5 +1,6 @@
 # VulneS
 
+VulneS is a vulnerability scanning tool. The project is under development.
 
 This project works with docker.
 
