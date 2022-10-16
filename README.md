@@ -4,8 +4,11 @@
 This project works with docker.
 
 Steps:
-1 - docker-compose build
-2 - docker-compose run
-
+```sh
+docker-compose build
+docker-compose up
+```
 or;
+```sh
 docker-compose up --build
+```
