@@ -45,8 +45,8 @@ INSTALLED_APPS = [
 
     #my_app
     'services',
-    'nmap',
-    'pages'
+    'pages',
+    'scanner'
 ]
 
 MIDDLEWARE = [

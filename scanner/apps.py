@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NmapConfig(AppConfig):
+class ScannerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'nmap'
+    name = 'scanner'
