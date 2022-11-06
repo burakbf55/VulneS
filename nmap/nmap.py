@@ -82,6 +82,7 @@ class PortScanner(object):
             "/usr/local/bin/nmap",
             "/sw/bin/nmap",
             "/opt/local/bin/nmap",
+            "C:\\Program Files (x86)\\Nmap\\nmap.exe",
         ),
     ):
         """
