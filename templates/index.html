@@ -78,7 +78,8 @@
                 <tbody>
                   {% for n in nmap_model %}
                   <tr>
-                    <td><a class="btn btn-warning btn-sm" href="#">{{n.id}}</a></td>
+                    <td><a class="btn btn-warning btn-sm" href="{% url 'scanner_detail' n.id %}">{{n.id}}</a>
+                    </td>
                     <td>{{n.name}}</td>
                     <td>{{n.ip}}</td>
                     <td>{{n.created_at}}</td>

@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% for s in nmap_model %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1> Detail Page </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Scanner</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <h1>{{s.name}}</h1>
+    <h1>{{s.ip}}</h1>
+    <h1>{{s.xml_name}}</h1>
+    <h1>{{s.scan_type}}</h1>
+    <h1>{{s.command_line}}</h1>
+    <h1>{{s.scan_method}}</h1>
+    <h1>{{s.host_up_or_down}}</h1>
+    <h1>{{s.scan_protocol_tcp}}</h1>
+    <h1>{{s.scan_port_keys}}</h1>
+    <h1>{{s.scan_tcp_port_details}}</h1>
+</div>
+{% endfor %}
+
+{% endblock content %}
