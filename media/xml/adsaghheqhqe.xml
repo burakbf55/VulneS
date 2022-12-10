@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.91 scan initiated Sat Dec 10 14:01:30 2022 as: /usr/bin/nmap -p 22 -sV -oX /code/media/xml/adsaghheqhqe.xml 127.0.0.1 -->
+<nmaprun scanner="nmap" args="/usr/bin/nmap -p 22 -sV -oX /code/media/xml/adsaghheqhqe.xml 127.0.0.1" start="1670680890" startstr="Sat Dec 10 14:01:30 2022" version="7.91" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="1" services="22"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1670680891" endtime="1670680891"><status state="up" reason="localhost-response" reason_ttl="0"/>
+<address addr="127.0.0.1" addrtype="ipv4"/>
+<hostnames>
+<hostname name="localhost" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="22"><state state="closed" reason="reset" reason_ttl="64"/><service name="ssh" method="table" conf="3"/></port>
+</ports>
+<times srtt="50" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1670680891" timestr="Sat Dec 10 14:01:31 2022" summary="Nmap done at Sat Dec 10 14:01:31 2022; 1 IP address (1 host up) scanned in 0.61 seconds" elapsed="0.61" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>
