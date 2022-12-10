@@ -10,12 +10,14 @@ class ScannerForm(forms.ModelForm):
         fields = [
             'name',
             'ip',
+            'ports',
             'xml_name',
-            'scan_type',
+            'arguments',
         ]
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'ip': forms.TextInput(attrs={'class': 'form-control'}),
-            'xml_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'scan_type': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter a scan name'}),
+            'ip': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter a target ip'}),
+            'ports': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter a port range; -p 1-1024, --top-ports 100 etc. '}),
+            'xml_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter a xml file name without .xml ex: scan1xmlname'}),
+            'arguments': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Please enter a nmap arguments; -sV, -sC, -A etc. '}),
         }

@@ -16,25 +16,22 @@ def nmap_scanner(request):
         scanner_form = ScannerForm(request.POST, request.FILES)
         if scanner_form.is_valid():
             target = scanner_form.cleaned_data['ip']
-            scan_type = scanner_form.cleaned_data['scan_type']
-            result = NmapService.nmap(target,'22',scan_type)
-            n_m = Nmap()
-            # get form data
-            n_m.name = scanner_form.cleaned_data['name']
-            n_m.ip = target
-            n_m.xml_name = scanner_form.cleaned_data['xml_name']
-            n_m.scan_type = scan_type
-            # get scan data 
-            n_m.command_line = result['command_line']
-            n_m.scan_method = result['scan_method']
-            n_m.host_up_or_down = result['host_up_or_down']
-            n_m.scan_protocol_tcp = result['scan_protocol_tcp']
-            n_m.scan_port_keys = result['scan_port_keys']
-            n_m.scan_tcp_port_details = result['scan_tcp_port_details']
-            n_m.save()
-        
+            ports = scanner_form.cleaned_data['ports']
+            arguments = scanner_form.cleaned_data['arguments']
+            xml_name = scanner_form.cleaned_data['xml_name']
+            result = NmapService.nmap(target, ports, arguments, xml_name)
+            nm = Nmap()
+            nm.name = scanner_form.cleaned_data['name']
+            nm.ip = scanner_form.cleaned_data['ip']
+            nm.ports = scanner_form.cleaned_data['ports']
+            nm.xml_name = scanner_form.cleaned_data['xml_name']
+            nm.arguments = scanner_form.cleaned_data['arguments']
+            nm.output = result
+            nm.save()
+            print(result)
             context =  {
             'scanner_form': scanner_form,
+            'result': result
             }
             return redirect('vulnerability_scanner')
         else:
@@ -53,9 +50,9 @@ def nmap_scanner(request):
 
 def nmap_detail(request, id):
     nmap_model = Nmap.objects.all().filter(id=id)
-    
+
     context = {
-        'nmap_model': nmap_model
+        'nmap_model': nmap_model,
     }
 
     return render(request, 'result.html', context)

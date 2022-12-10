@@ -1,33 +1,27 @@
-from nmap import nmap
+import json
+import os
+
+import xmltodict
+
+from .views import nmap_to_command
 
 
 class NmapService():
-    def __init__(self, target, options):
+    def __init__(self, target, ports, arguments, filename):
         self.target = target
-        self.options = options
-    
-    def nmap(target, ports= None, arguments='-sV',
-             sudo=False, timeout=0):
-        nm = nmap.PortScanner()
-        nm.scan(target, ports, arguments)
-        com_line = nm.command_line()
-        scan_method = nm.scaninfo().get('method')
-        host_up_or_down = nm[target].state()
-        scan_protocol_tcp = nm[target].all_protocols()
-        print(nm[target]['tcp'].keys())
-        scan_port_keys = nm[target]['tcp'].keys()
-        c = {}
-        for port in scan_port_keys:
-            c[port] = nm[target]['tcp'][port]
-        scan_tcp_port_details = c
+        self.ports = ports
+        self.arguments = arguments
+        self.filename = filename
+        # ileride kullanılacak.
 
-        content = {
-            'command_line': com_line,
-            'scan_method': scan_method,
-            'host_up_or_down': host_up_or_down,
-            'scan_protocol_tcp': scan_protocol_tcp,
-            'scan_port_keys': scan_port_keys,
-            'scan_tcp_port_details': scan_tcp_port_details
-        }
+    def nmap_xml_to_json(filename):
+        with open("/code/media/xml/" + filename + ".xml") as xml_file:
+            data_dict = xmltodict.parse(xml_file.read())
+            json_data = json.dumps(data_dict)
+            return json_data
 
-        return content
+    def nmap(target, ports, arguments ,filename):
+        nmap_to_command(target, filename, ports, arguments)
+        
+        return NmapService.nmap_xml_to_json(filename)
+        
