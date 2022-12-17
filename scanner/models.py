@@ -9,8 +9,8 @@ class Nmap(BaseModel):
     # get form data
     name = models.CharField(max_length=300)
     ip = models.CharField(max_length=200)
-    ports = models.CharField(max_length=200)
-    xml_name = models.CharField(max_length=100, blank= True, null= True)
+    ports = models.CharField(max_length=200, blank=True, null=True)
+    xml_name = models.CharField(max_length=100)
     xml_file = models.FileField(upload_to='nmap/xml/', blank= True, null= True)
     arguments = models.CharField(max_length=100, blank= True, null= True)
     # get scan data

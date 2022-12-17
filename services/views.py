@@ -4,7 +4,10 @@ from django.shortcuts import render
 
 
 def nmap_to_command(target, filename ,ports, arguments):
-    nmap_command = "/usr/bin/nmap "+ ports + " " + arguments + " " + target + " " + "-oX" + " " + "/code/media/xml/" + filename + ".xml" 
+    if ports:
+        nmap_command = "nmap " + ports + " " + arguments + " " + target + " " + "-oX" + " " + "/code/media/xml/" + filename + ".xml"
+    else:
+        nmap_command = "nmap " + arguments + " " + target + " " + "-oX" + " " + "/code/media/xml/" + filename + ".xml" 
     
     os.system(nmap_command)
     print(nmap_command)

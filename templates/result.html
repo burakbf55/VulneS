@@ -125,14 +125,10 @@
                                         <strong>SERVICES</strong>
                                     </p>
 
-                                    {% for c in nmap_model %}
-                                    <div class="chart">
-                                        {% if c.scan_tcp_port_details %}
-                                        <h1>{{c.scan_tcp_port_details}}</h1>
-                                        <h1>{{a}}</h1>
-                                        {% endif %}
-                                    </div>
-                                    {% endfor %}
+                                    {{ip}}
+                                    {{protocol}}
+                                    {{port}}
+                                    {{service}}
                                     <!-- /.chart-responsive -->
                                 </div>
                                 <!-- /.col -->

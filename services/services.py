@@ -19,22 +19,21 @@ class NmapService():
         tree = ElementTree.parse("/code/media/xml/" + xml + ".xml")
         root = tree.getroot()
         parsed_data = []
-        tags = [elem.tag for elem in root.iter()]       
-        print(tags)
-
-        nmap_args = root.attrib['args']
+        
         for host in root.findall('host'):
+            # updown=host.find('status').get('state')
             for address in host.findall('address'):
                 curr_address = address.attrib['addr']
                 data = {
+                    'command_line': curr_address, 
                     'address': curr_address,
-                    'ports': []
+                    'ports-2': []
                 }
-                states = host.findall('ports/port/state')
+                states = host.findall('ports/extraports/state')
                 ports = host.findall('ports/port')
                 for i in range(len(ports)):
-                    if states[i].attrib['state'] == 'closed':
-                        continue  # Skip closed ports
+                    # if states[i].attrib['state'] == 'closed':
+                    #     continue 
                     port_id = ports[i].attrib['portid']
                     protocol = ports[i].attrib['protocol']
                     services = ports[i].findall('service')
@@ -54,7 +53,7 @@ class NmapService():
                         cpes = service.findall('cpe')
                         for cpe in cpes:
                             cpe_list.append(cpe.text)
-                        data['ports'].append({
+                        data['ports-2'].append({
                             'port_id': port_id,
                             'protocol': protocol,
                             'service_name': service_name,
@@ -63,7 +62,7 @@ class NmapService():
                             'cpes': cpe_list
                         })
                         parsed_data.append(data)
-        return nmap_args, parsed_data
+        return parsed_data
 
     def nmap_xml_to_json(filename):
         with open("/code/media/xml/" + filename + ".xml") as xml_file:
