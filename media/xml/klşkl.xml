@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.70 scan initiated Sun Dec 18 20:04:15 2022 as: nmap -&#45;top-ports 100 -sT -A -T4 -oX /code/media/xml/kl&#xc5;&#x9f;kl.xml scanme.nmap.org -->
+<nmaprun scanner="nmap" args="nmap -&#45;top-ports 100 -sT -A -T4 -oX /code/media/xml/kl&#xc5;&#x9f;kl.xml scanme.nmap.org" start="1671393855" startstr="Sun Dec 18 20:04:15 2022" version="7.70" xmloutputversion="1.04">
+<scaninfo type="connect" protocol="tcp" numservices="100" services="7,9,13,21-23,25-26,37,53,79-81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,443-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1671393855" endtime="1671393894"><status state="up" reason="reset" reason_ttl="37"/>
+<address addr="45.33.32.156" addrtype="ipv4"/>
+<hostnames>
+<hostname name="scanme.nmap.org" type="user"/>
+</hostnames>
+<ports><extraports state="filtered" count="100">
+<extrareasons reason="no-responses" count="100"/>
+</extraports>
+</ports>
+<os></os>
+<distance value="19"/>
+<trace proto="icmp">
+<hop ttl="1" ipaddr="172.19.0.1" rtt="0.04"/>
+<hop ttl="19" ipaddr="45.33.32.156" rtt="215.11"/>
+</trace>
+<times srtt="30898" rttvar="56253" to="255910"/>
+</host>
+<runstats><finished time="1671393894" timestr="Sun Dec 18 20:04:54 2022" elapsed="39.69" summary="Nmap done at Sun Dec 18 20:04:54 2022; 1 IP address (1 host up) scanned in 39.69 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

@@ -34,15 +34,7 @@ def nmap_scanner(request):
             result = NmapService.nmap(target, ports, arguments, xml_name)
             save_nm_db(name, target, ports, xml_name, arguments, result)
             print(result)
-            for raw_data in result:
-                print(raw_data)
-                adress = raw_data['address']
-                ports = raw_data['ports-2']
-                for port_data in ports:
-                    context['ip'] = adress
-                    context['protocol'] = port_data['protocol']
-                    context['port'] = port_data['portid']
-                    context['service'] = f"{port_data['service_name'] if port_data['service_name'] else ''} {port_data['service_product'] if port_data['service_product'] else ''} {port_data['service_version'] if port_data['service_version'] else ''}"
+            
             context =  {
             'scanner_form': scanner_form,
             'result': result
@@ -64,9 +56,17 @@ def nmap_scanner(request):
 
 def nmap_detail(request, id):
     nmap_model = Nmap.objects.all().filter(id=id)
-
-    context = {
-        'nmap_model': nmap_model,
-    }
+    result = nmap_model.values('output')
+    context = {}
+    print(result[0]['output'])
+    for raw_data in result:
+                adress = raw_data['address']
+                ports = raw_data['ports-2']
+                for port_data in ports:
+                    context['ip'] = adress
+                    context['protocol'] = port_data['protocol']
+                    context['port'] = port_data['portid']
+                    context['service'] = f"{port_data['service_name'] if port_data['service_name'] else ''} {port_data['service_product'] if port_data['service_product'] else ''} {port_data['service_version'] if port_data['service_version'] else ''}"
+    context['nmap_model'] = nmap_model
 
     return render(request, 'result.html', context)
