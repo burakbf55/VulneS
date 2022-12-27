@@ -55,18 +55,30 @@ def nmap_scanner(request):
 
 
 def nmap_detail(request, id):
-    nmap_model = Nmap.objects.all().filter(id=id)
-    result = nmap_model.values('output')
-    context = {}
-    print(result[0]['output'])
+    nmap_model = Nmap.objects.get(id=id)
+    xml_name = nmap_model.xml_name
+    context = {
+        'ports2': []
+    }
+
+    result = NmapService.parse_nmap_xml(xml_name)
+    open_count, filtered_count, closed_count = NmapService.count_ports(result)
     for raw_data in result:
-                adress = raw_data['address']
-                ports = raw_data['ports-2']
-                for port_data in ports:
-                    context['ip'] = adress
-                    context['protocol'] = port_data['protocol']
-                    context['port'] = port_data['portid']
-                    context['service'] = f"{port_data['service_name'] if port_data['service_name'] else ''} {port_data['service_product'] if port_data['service_product'] else ''} {port_data['service_version'] if port_data['service_version'] else ''}"
+        print(raw_data)
+        adress = raw_data['address']
+        ports = raw_data['ports-2']
+        for port_data in ports:
+            print(port_data)
+            context['ports2'].append(port_data)
+            context['ip'] = adress
+            context['protocol'] = port_data['protocol']
+            context['port'] = port_data['port_id']
+            context['service'] = f"{port_data['service_name'] if port_data['service_name'] else ''} {port_data['service_product'] if port_data['service_product'] else ''} {port_data['service_version'] if port_data['service_version'] else ''}"
     context['nmap_model'] = nmap_model
+    context['open_count'] = open_count
+    context['filtered_count'] = filtered_count
+    context['closed_count'] = closed_count
+    context['xml_name'] = xml_name
+
 
     return render(request, 'result.html', context)

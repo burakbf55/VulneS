@@ -3,7 +3,6 @@
 
 {% block content %}
 
-{% for s in nmap_model %}
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -30,13 +29,12 @@
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-code"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-text">XML Name</span>
                             <span class="info-box-number">
-                                10
-                                <small>%</small>
+                                {{ xml_name }}.xml
                             </span>
                         </div>
                         <!-- /.info-box-content -->
@@ -46,11 +44,11 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-unlock-alt"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">Open Ports</span>
+                            <span class="info-box-number">{{open_count}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -63,11 +61,11 @@
 
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-filter"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Sales</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-text">Filtered Ports</span>
+                            <span class="info-box-number">{{filtered_count}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -76,11 +74,11 @@
                 <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-lock"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">Closed Ports</span>
+                            <span class="info-box-number">{{closed_count}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -124,11 +122,25 @@
                                     <p class="text-center">
                                         <strong>SERVICES</strong>
                                     </p>
+                                    {% for port in ports2 %}
+                                    {{ port.port_id }},
+                                    {% endfor %}
 
-                                    {{ip}}
-                                    {{protocol}}
-                                    {{port}}
-                                    {{service}}
+                                    {% for port in ports2 %}
+                                    {{ port.protocol }}
+                                    {% endfor %}
+                                    {% for port in ports2 %}
+                                    {{ port.service_name }}
+                                    {% endfor %}
+
+                                    {% for port in ports2 %}
+                                    {{ port.status }}
+                                    {% endfor %}
+
+
+                                    {{open_count}}
+                                    {{filtered_count}}
+                                    {{closed_count}}
                                     <!-- /.chart-responsive -->
                                 </div>
                                 <!-- /.col -->
@@ -891,6 +903,5 @@
     </section>
     <!-- /.content -->
 </div>
-{% endfor %}
 
 {% endblock content %}
