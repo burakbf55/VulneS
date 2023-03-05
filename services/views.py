@@ -1,7 +1,5 @@
 import os
 
-from django.shortcuts import render
-
 
 def nmap_to_command(target, filename ,ports, arguments):
     if ports:

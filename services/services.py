@@ -67,7 +67,7 @@ class NmapService():
                         parsed_data.append(data)
         return parsed_data
     
-    def count_ports(parsed_data):
+    def count_ports_and_services(parsed_data):
         open_count = 0
         filtered_count = 0
         closed_count = 0
@@ -81,7 +81,19 @@ class NmapService():
                 elif port['status'] == 'closed':
                     closed_count += 1
         
-        return open_count, filtered_count, closed_count
+        result_list = NmapService.count_services(parsed_data)
+        
+        return open_count, filtered_count, closed_count, result_list
+
+    def count_services(parsed_data):
+        service_counts = {}
+        for item in parsed_data:
+            for port in item['ports-2']:
+                service_name = port['service_name']
+                service_counts[service_name] = service_counts.get(service_name, 0) + 1
+
+        result_list = [f"{key}({value})" for key, value in service_counts.items()]
+        return result_list
 
     def nmap_xml_to_json(filename):
         with open("/code/media/xml/" + filename + ".xml") as xml_file:

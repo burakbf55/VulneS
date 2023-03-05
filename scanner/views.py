@@ -62,7 +62,8 @@ def nmap_detail(request, id):
     }
 
     result = NmapService.parse_nmap_xml(xml_name)
-    open_count, filtered_count, closed_count = NmapService.count_ports(result)
+    open_count, filtered_count, closed_count, service_counts_list = NmapService.count_ports_and_services(result)
+    print(result)
     for raw_data in result:
         print(raw_data)
         adress = raw_data['address']
@@ -79,6 +80,7 @@ def nmap_detail(request, id):
     context['filtered_count'] = filtered_count
     context['closed_count'] = closed_count
     context['xml_name'] = xml_name
+    context['service_counts_list'] = service_counts_list
 
 
     return render(request, 'result.html', context)
